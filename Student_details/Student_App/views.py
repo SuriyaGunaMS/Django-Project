@@ -80,12 +80,10 @@ def Student_result(request):
     if request.method =="GET":
         try:
             with connection.cursor() as cursor:
-                # cursor.execute("SELECT * FROM student_mark_table")
-                # row = cursor.fetchall() 
-                # for i in row               
+                              
                 cursor.execute("SELECT * FROM student_mark_table")
                 row1=cursor.fetchall()  
-                print(row1,"11111111111111111111")  
+                 
                 A =[]
                 B=[]
                 C=[]
@@ -93,11 +91,10 @@ def Student_result(request):
                 E=[]
                 F=[]            
                 for i in row1:
-                    print((i[1]),"3333333333333")
-                    # i[1]=int(i[1])
+                    
                     if i[1] in range(91, 100):
                     
-                        print("44444444444")
+                        
                         A.append(i[1])
                     elif i[1] in range(81, 90):
                     
@@ -115,7 +112,7 @@ def Student_result(request):
                         F.append(i[1])
                         
                 response = {"status":"Success","Total no of students":len(row1),"No of student in A grade":len(A),"No of student in B grade":len(B),"No of student in C grade":len(C),"No of student in D grade":len(D),"No of student in E grade":len(E),"No of student in F grade":len(F),"Distinction":(len(A)/len(row1))*100,"First Class":((len(B)+len(C))/len(row1))*100,"Pass":((len(row1)-len(F))/len(row1))*100}
-                print(A,"222222222222222222")
+                
                 return JsonResponse(response)
 
         except Exception as e:
